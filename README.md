@@ -1,4 +1,4 @@
-# Android-UIView v1.0
+# Android-UIView
 
 这儿是一个仿iOS视图控件的类库，目前正在开发的有以下View控件：
 
