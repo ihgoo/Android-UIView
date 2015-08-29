@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">AndroidUIView</string>
+
+
+    <string name="pointMessage">提示信息</string>
+    <string name="dialog_cancel">取消</string>
+    <string name="dialog_confirm">确定</string>
+</resources>

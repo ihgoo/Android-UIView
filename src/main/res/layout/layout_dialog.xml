@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bgColor_overlay"
+        android:clickable="true">
+
+    <LinearLayout
+            android:layout_gravity="center"
+            android:id="@+id/ll_content_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/dialog_background"
+            android:orientation="vertical">
+
+        <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:gravity="center"
+                android:text="允许“百度地图”在您并未使用该应用程序访问您的位置吗？"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/textColor_alert_title"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                />
+
+        <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="只有开启定位功能才能正常使用该程序。"
+                android:gravity="center"
+                android:padding="1dp"
+                android:textColor="@color/textColor_alert_msg"
+                android:textSize="15sp"/>
+
+        <TextView
+                style="@style/divider_horizontal"
+                android:layout_marginTop="15dp"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+            <TextView
+                    android:background="@drawable/bg_alertbutton_left"
+                    android:id="@+id/tv_cancel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="@string/dialog_cancel"
+                    android:textColor="@color/textColor_alert_button_cancel"
+                    android:textSize="15sp"/>
+
+            <TextView
+                    style="@style/divider_vertical"
+                    />
+
+            <TextView
+                    android:background="@drawable/bg_alertbutton_right"
+                    android:id="@+id/tv_confirm"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="@string/dialog_confirm"
+                    android:textColor="@color/textColor_alert_button_others"
+                    android:textSize="15sp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
+
