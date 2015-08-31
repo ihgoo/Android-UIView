@@ -7,4 +7,7 @@
     <dimen name="buttontoast_x_padding">12dp</dimen>
     <dimen name="cardtoast_margin">4dp</dimen>
 
+    <dimen name="dialog_textview_height">16dp</dimen>
+
+
 </resources>
