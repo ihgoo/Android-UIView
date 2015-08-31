@@ -1,18 +1,18 @@
-package me.xunhou.androiduiview.progressbar;
+package me.xunhou.androiduiview.progressview;
 
 import android.content.Context;
 
 /**
  * Created by ihgoo on 2015/8/27.
  */
-public class UIProgressbar {
+public class UIProgressView {
 
     private Context mContext;
 
-    private UIProgressbar() {
+    private UIProgressView() {
     }
 
-    public UIProgressbar(Context context) {
+    public UIProgressView(Context context) {
         this.mContext = context;
     }
 }

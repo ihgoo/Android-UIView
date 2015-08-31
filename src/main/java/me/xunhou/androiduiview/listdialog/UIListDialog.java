@@ -3,18 +3,24 @@ package me.xunhou.androiduiview.listdialog;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Dialog;
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ListView;
-import android.widget.TextView;
 import me.xunhou.androiduiview.R;
 
 /**
  * Created by ihgoo on 2015/8/27.
  */
-public class UIListDialog extends Dialog {
+public class UIListDialog {
+
+    private Context   mContext;
+    private ViewGroup decorView;
+    private ViewGroup rootView;
+    ViewGroup contentContainer;
 
     private ListView listView;
 
@@ -24,34 +30,28 @@ public class UIListDialog extends Dialog {
     private List<String> messages = new ArrayList<>();
 
     public UIListDialog(Context context) {
-        super(context);
-        initView();
-    }
-
-    public UIListDialog(Context context, int theme) {
-        super(context, theme);
-        initView();
-    }
-
-    protected UIListDialog(Context context, boolean cancelable, OnCancelListener cancelListener) {
-        super(context, cancelable, cancelListener);
+        this.mContext = context;
         initView();
     }
 
     private void initView() {
-        setContentView(R.layout.layout_list_dialog);
-        listView = (ListView) findViewById(R.id.lv);
-        uiListAdapter = new UIListAdapter(getContext(), messages);
+        LayoutInflater layoutInflater = LayoutInflater.from(mContext);
+        decorView = (ViewGroup) ((Activity) mContext).getWindow().getDecorView().findViewById(android.R.id.content);
+        rootView = (ViewGroup) layoutInflater.inflate(R.layout.layout_list_dialog, decorView, false);
+        contentContainer = (ViewGroup) rootView.findViewById(R.id.ll_content_container);
+        listView = (ListView) rootView.findViewById(R.id.lv);
+        uiListAdapter = new UIListAdapter(mContext, messages);
+        listView.setAdapter(uiListAdapter);
     }
 
     public void setTitle(String title) {
-        if (header != null) {
-            listView.removeHeaderView(header);
-        }
-        header = LayoutInflater.from(getContext()).inflate(R.layout.header_list_dialog, null);
-        TextView tvTitle = (TextView) header.findViewById(R.id.tv_title);
-        tvTitle.setText(title);
-        listView.addHeaderView(header);
+//        if (header != null) {
+//            listView.removeHeaderView(header);
+//        }
+//        header = LayoutInflater.from(mContext).inflate(R.layout.header_list_dialog, null);
+//        TextView tvTitle = (TextView) header.findViewById(R.id.tv_title);
+//        tvTitle.setText(title);
+//        listView.addHeaderView(header);
     }
 
     public void setMessages(List<String> msgs) {
@@ -60,8 +60,13 @@ public class UIListDialog extends Dialog {
         uiListAdapter.notifyDataSetChanged();
     }
 
-    public void show() {
-        super.show();
+    private void show(View view) {
+        decorView.addView(view);
+        contentContainer.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.fade_in_center));
+    }
+
+    public void build(){
+        show(rootView);
     }
 
 }

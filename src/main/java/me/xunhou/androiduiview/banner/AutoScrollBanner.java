@@ -13,7 +13,7 @@ import android.view.MotionEvent;
 /**
  * Created by ihgoo on 2015/1/19.
  */
-public class AutoBannerViewPager extends ViewPager implements AutoBannerInterface {
+public class AutoScrollBanner extends ViewPager implements AutoScrollBannerInterface {
 
     private AntoBannerViewPagerHandler mListenersHandler;
 
@@ -35,14 +35,14 @@ public class AutoBannerViewPager extends ViewPager implements AutoBannerInterfac
 
     private boolean smoothScroll = true;
 
-    private AutoBannerInterface mAutoBannerListener;
+    private AutoScrollBannerInterface mAutoBannerListener;
 
-    public AutoBannerViewPager(Context context) {
+    public AutoScrollBanner(Context context) {
         super(context);
         init();
     }
 
-    public AutoBannerViewPager(Context context, AttributeSet attrs) {
+    public AutoScrollBanner(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
@@ -51,7 +51,7 @@ public class AutoBannerViewPager extends ViewPager implements AutoBannerInterfac
         mListenersHandler = new AntoBannerViewPagerHandler(this);
     }
 
-    public void setmAutoBannerListener(AutoBannerInterface mAutoBannerListener) {
+    public void setmAutoBannerListener(AutoScrollBannerInterface mAutoBannerListener) {
         this.mAutoBannerListener = mAutoBannerListener;
     }
 
@@ -127,25 +127,25 @@ public class AutoBannerViewPager extends ViewPager implements AutoBannerInterfac
 
     private static final class AntoBannerViewPagerHandler extends Handler {
 
-        private WeakReference<AutoBannerInterface> mAutoBanner;
+        private WeakReference<AutoScrollBannerInterface> mAutoBanner;
 
-        public AntoBannerViewPagerHandler(AutoBannerInterface mAutoBannerViewPager) {
+        public AntoBannerViewPagerHandler(AutoScrollBannerInterface mAutoBannerViewPager) {
             this.mAutoBanner = new WeakReference<>(mAutoBannerViewPager);
         }
 
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            AutoBannerInterface autoBannerInterface = mAutoBanner.get();
+            AutoScrollBannerInterface autoBannerInterface = mAutoBanner.get();
             if (autoBannerInterface == null) {
                 return;
             }
 
             switch (msg.what) {
-                case AutoBannerViewPager.START_WHAT:
+                case AutoScrollBanner.START_WHAT:
                     autoBannerInterface.scroll();
                     break;
-                case AutoBannerViewPager.STOP_WHAT:
+                case AutoScrollBanner.STOP_WHAT:
                     autoBannerInterface.stopScroll();
                     break;
                 default:

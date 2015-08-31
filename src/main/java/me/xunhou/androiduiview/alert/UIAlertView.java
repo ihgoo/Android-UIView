@@ -1,4 +1,4 @@
-package me.xunhou.androiduiview.dialog;
+package me.xunhou.androiduiview.alert;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,7 +13,7 @@ import me.xunhou.androiduiview.R;
 /**
  * Created by ihgoo on 2015/8/25.
  */
-public class UIDialog {
+public class UIAlertView {
 
     private Context   mContext;
     private ViewGroup decorView;
@@ -21,51 +21,51 @@ public class UIDialog {
 
     ViewGroup contentContainer;
 
-    private UIDialogClickListener mDialogClickListener;
+    private UIAlertViewClickListener mDialogClickListener;
 
     private TextView tvTitile;
     private TextView tvContent;
     private TextView tvConfirm;
     private TextView tvCancel;
 
-    private UIDialog() {
+    private UIAlertView() {
     }
 
-    public UIDialog(Context context) {
+    public UIAlertView(Context context) {
         this.mContext = context;
     }
 
-    public void showQuestionDialog(String title, String content, UIDialogClickListener uiDialogClickListener) {
-        prepare(UIDialogStyle.Question_Style, title, content, null, null, uiDialogClickListener);
+    public void showQuestionDialog(String title, String content, UIAlertViewClickListener uiAlertViewClickListener) {
+        prepare(UIAlertViewStyle.Question_Style, title, content, null, null, uiAlertViewClickListener);
         build();
     }
 
     public void showQuestionDialog(String title, String content, String confirmText,
-                                   UIDialogClickListener uiDialogClickListener) {
-        prepare(UIDialogStyle.Question_Style, title, content, confirmText, null, uiDialogClickListener);
+                                   UIAlertViewClickListener uiAlertViewClickListener) {
+        prepare(UIAlertViewStyle.Question_Style, title, content, confirmText, null, uiAlertViewClickListener);
         build();
     }
 
     public void showQuestionDialog(String title, String content, String confirmText, String cancelText,
-                                   UIDialogClickListener uiDialogClickListener) {
-        prepare(UIDialogStyle.Question_Style, title, content, confirmText, cancelText, uiDialogClickListener);
+                                   UIAlertViewClickListener uiAlertViewClickListener) {
+        prepare(UIAlertViewStyle.Question_Style, title, content, confirmText, cancelText, uiAlertViewClickListener);
         build();
     }
 
     public void showTipDialog(String content,
-                              UIDialogClickListener uiDialogClickListener) {
-        prepare(UIDialogStyle.Tip_Style, null, content, null, null, uiDialogClickListener);
+                              UIAlertViewClickListener uiAlertViewClickListener) {
+        prepare(UIAlertViewStyle.Tip_Style, null, content, null, null, uiAlertViewClickListener);
         build();
     }
 
     public void showTipDialog(String title, String content, String confirmText,
-                              UIDialogClickListener uiDialogClickListener) {
-        prepare(UIDialogStyle.Tip_Style, title, content, confirmText, null, uiDialogClickListener);
+                              UIAlertViewClickListener uiAlertViewClickListener) {
+        prepare(UIAlertViewStyle.Tip_Style, title, content, confirmText, null, uiAlertViewClickListener);
         build();
     }
 
     void prepare(int style, String title, String content, String confirmText, String cancelText,
-                 UIDialogClickListener uiDialogClickListener) {
+                 UIAlertViewClickListener uiAlertViewClickListener) {
         if (style == 0) {
             throw new UnsupportedOperationException("not support this style.");
         }
@@ -87,8 +87,8 @@ public class UIDialog {
             setConfirmText(confirmText);
         }
 
-        if (null != uiDialogClickListener) {
-            setClickListener(uiDialogClickListener);
+        if (null != uiAlertViewClickListener) {
+            setClickListener(uiAlertViewClickListener);
         }
 
     }
@@ -124,9 +124,9 @@ public class UIDialog {
             }
         });
 
-        if (style == UIDialogStyle.Question_Style) {
+        if (style == UIAlertViewStyle.Question_Style) {
             tvCancel.setVisibility(View.VISIBLE);
-        } else if (style == UIDialogStyle.Tip_Style) {
+        } else if (style == UIAlertViewStyle.Tip_Style) {
             tvCancel.setVisibility(View.GONE);
         }
 
@@ -153,45 +153,45 @@ public class UIDialog {
         return view != null;
     }
 
-    public UIDialog setCancelText(String text) {
+    public UIAlertView setCancelText(String text) {
         if (!TextUtils.isEmpty(text)) {
             tvCancel.setText(text);
         }
         return this;
     }
 
-    public UIDialog setConfirmText(String text) {
+    public UIAlertView setConfirmText(String text) {
         if (!TextUtils.isEmpty(text)) {
             tvConfirm.setText(text);
         }
         return this;
     }
 
-    public UIDialog setTitile(String title) {
+    public UIAlertView setTitile(String title) {
         if (!TextUtils.isEmpty(title)) {
             tvTitile.setText(title);
         }
         return this;
     }
 
-    public UIDialog setTitile(int resId) {
+    public UIAlertView setTitile(int resId) {
         setTitile(mContext.getResources().getString(resId));
         return this;
     }
 
-    public UIDialog setContent(String content) {
+    public UIAlertView setContent(String content) {
         if (!TextUtils.isEmpty(content)) {
             tvContent.setText(content);
         }
         return this;
     }
 
-    public UIDialog setContent(int resId) {
+    public UIAlertView setContent(int resId) {
         setContent(mContext.getResources().getString(resId));
         return this;
     }
 
-    public UIDialog setClickListener(UIDialogClickListener dialogClickListener) {
+    public UIAlertView setClickListener(UIAlertViewClickListener dialogClickListener) {
         mDialogClickListener = dialogClickListener;
         return this;
     }

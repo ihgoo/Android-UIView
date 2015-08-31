@@ -8,7 +8,7 @@ import android.view.View;
 /**
  * Created by ihgoo on 2015/8/29.
  */
-public class SwitchButton extends View{
+public class UISwitch extends View{
 
 
 
@@ -16,15 +16,15 @@ public class SwitchButton extends View{
     private int motionY;
 
 
-    public SwitchButton(Context context) {
+    public UISwitch(Context context) {
         super(context);
     }
 
-    public SwitchButton(Context context, AttributeSet attrs) {
+    public UISwitch(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public SwitchButton(Context context, AttributeSet attrs, int defStyleAttr) {
+    public UISwitch(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

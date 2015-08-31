@@ -1,4 +1,4 @@
-package me.xunhou.androiduiview.dialog;
+package me.xunhou.androiduiview.alert;
 
 import android.view.ViewGroup;
 
