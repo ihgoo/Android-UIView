@@ -1,6 +1,7 @@
 package me.xunhou.androiduiview.listdialog;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import android.app.Activity;
@@ -9,28 +10,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import me.xunhou.androiduiview.R;
 
 /**
  * Created by ihgoo on 2015/8/27.
  */
-public class UIListDialog {
-
+public class UIListDialog implements AdapterView.OnItemClickListener {
     private Context   mContext;
     private ViewGroup decorView;
     private ViewGroup rootView;
-    ViewGroup contentContainer;
+    ViewGroup     contentContainer;
+    UIListAdapter mAdapter;
+
+    private UIListInterface mUIListOnClickListener;
 
     private ListView listView;
+    private Button   button;
 
-    private View          header;
-    private UIListAdapter uiListAdapter;
+    private ArrayList<String> mItemMessage = new ArrayList<String>();
 
-    private List<String> messages = new ArrayList<>();
+    private UIListDialog() {
+    }
 
-    public UIListDialog(Context context) {
-        this.mContext = context;
+    public UIListDialog(Context mContext) {
+        this.mContext = mContext;
         initView();
     }
 
@@ -40,33 +47,77 @@ public class UIListDialog {
         rootView = (ViewGroup) layoutInflater.inflate(R.layout.layout_list_dialog, decorView, false);
         contentContainer = (ViewGroup) rootView.findViewById(R.id.ll_content_container);
         listView = (ListView) rootView.findViewById(R.id.lv);
-        uiListAdapter = new UIListAdapter(mContext, messages);
-        listView.setAdapter(uiListAdapter);
+        button = (Button) rootView.findViewById(R.id.btn_cancel);
+        mAdapter = new UIListAdapter(mContext, mItemMessage);
+        listView.setAdapter(mAdapter);
+        listView.setOnItemClickListener(this);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mUIListOnClickListener != null) {
+                    mUIListOnClickListener.cancel();
+                    if (isShowing()){
+                        dismiss();
+                    }
+                }
+            }
+        });
     }
 
-    public void setTitle(String title) {
-//        if (header != null) {
-//            listView.removeHeaderView(header);
-//        }
-//        header = LayoutInflater.from(mContext).inflate(R.layout.header_list_dialog, null);
-//        TextView tvTitle = (TextView) header.findViewById(R.id.tv_title);
-//        tvTitle.setText(title);
-//        listView.addHeaderView(header);
-    }
-
-    public void setMessages(List<String> msgs) {
-        messages.clear();
-        messages.addAll(msgs);
-        uiListAdapter.notifyDataSetChanged();
-    }
-
-    private void show(View view) {
+    private void attached(View view) {
         decorView.addView(view);
         contentContainer.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.fade_in_center));
     }
 
-    public void build(){
-        show(rootView);
+    public UIListDialog setMessages(String[] messages) {
+        List<String> strings = Arrays.asList(messages);
+        mItemMessage.addAll(strings);
+        mAdapter.notifyDataSetChanged();
+        return this;
     }
 
+    public UIListDialog setMessages(List<String> messages) {
+        mItemMessage.clear();
+        mItemMessage.addAll(messages);
+        mAdapter.notifyDataSetChanged();
+        return this;
+    }
+
+    public boolean isShowing() {
+        View view = decorView.findViewById(R.id.ll_content_container);
+        return view != null;
+    }
+
+    public void dismiss() {
+        if (isShowing()) {
+            dismiss(rootView);
+        }
+    }
+
+    private void dismiss(View view) {
+        decorView.removeView(view);
+        contentContainer.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.fade_out_center));
+    }
+
+    public void setOnClickListener(UIListInterface uiListInterface) {
+        mUIListOnClickListener = uiListInterface;
+    }
+
+    public void build() {
+        if (isShowing()) {
+            return;
+        }
+        attached(rootView);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        if (mUIListOnClickListener != null) {
+            TextView textView = (TextView) view.findViewById(R.id.tv_message);
+            mUIListOnClickListener.select(textView.getText().toString().trim());
+            if (isShowing()){
+                dismiss();
+            }
+        }
+    }
 }

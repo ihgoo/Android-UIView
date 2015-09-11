@@ -25,5 +25,6 @@
 
 ##Thanks
 
+* [Rebound](http://facebook.github.io/rebound/) A Java library that models spring dynamics and adds real world physics to your app.
 * AndroidViewAnimations many show and dismiss animation reference to it
 * [SuperToast](https://github.com/JohnPersano/SuperToasts)

@@ -33,6 +33,7 @@ public class UIAlertView {
 
     public UIAlertView(Context context) {
         this.mContext = context;
+        prepare(UIAlertViewStyle.Question_Style, null, null, null, null, null);
     }
 
     public void showQuestionDialog(String title, String content, UIAlertViewClickListener uiAlertViewClickListener) {

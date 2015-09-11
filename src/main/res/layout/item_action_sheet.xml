@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/ll"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <View android:layout_width="match_parent" android:layout_height="1dp"/>
+
+
+    <LinearLayout
+            android:background="@drawable/corner_selector"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <TextView
+                android:layout_margin="15dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="起手。对贼、术、猎、骑可以留飞弹"
+                android:textColor="@color/textColor_alert_button_others"
+                android:textSize="@dimen/dialog_textview_height"/>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
